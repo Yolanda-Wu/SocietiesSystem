@@ -1,0 +1,21 @@
+@import 'Assets/style/_function.scss';
+
+html {
+  font-size: 10px;
+}
+
+body {
+  font-family: 'Microsoft Yahei', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased; //字体平滑
+  width: 100vw;
+  height: 100vh;
+  background-color: $colorBg;
+}
+
+p {
+  margin: 0;
+}
+
+input {
+  outline: 0;
+}

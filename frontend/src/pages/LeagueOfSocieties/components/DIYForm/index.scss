@@ -1,0 +1,45 @@
+@import 'Assets/style/_function.scss';
+
+.diy-questions {
+  border-top: solid 1px #f7f8f9;
+  // padding-top: 10px;
+  margin-top: 10px;
+  margin-bottom: 40px;
+
+  .attachment {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    .text {
+      line-height: 26px;
+    }
+
+    .btn {
+      width: 66px;
+      height: 26px;
+      border-radius: 5px;
+      border: solid 1px $colorPrimary;
+      padding: 0;
+
+      span {
+        line-height: 26px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: $colorTextBlue;
+      }
+    }
+  }
+
+  .ques-box {
+    p {
+      line-height: 30px;
+    }
+
+    .ques {
+      height: 84px;
+      border-radius: 5px;
+      border: solid 1px rgba(118, 183, 250, 0.5);
+    }
+  }
+}

@@ -1,0 +1,16 @@
+.save-btn {
+  width: 73px;
+  height: 74px;
+  border-radius: 50%;
+  background-image: linear-gradient(0deg, #76b7fa 0%, #76b7fa 100%);
+  box-shadow: 0 3px 20px 0 rgba(0, 0, 0, 0.16);
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: bold;
+  padding: 15px;
+  text-align: center;
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  z-index: 1001;
+}

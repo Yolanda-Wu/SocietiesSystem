@@ -1,0 +1,21 @@
+{
+  "plugins": ["stylelint-scss", "stylelint-order"],
+  "extends": ["stylelint-config-standard", "stylelint-config-recommended-scss"],
+  "rules": {
+    "font-family-no-missing-generic-family-keyword": null,
+    "at-rule-empty-line-before": [
+      "always",
+      {
+        "except": [
+          "inside-block",
+          "blockless-after-same-name-blockless",
+          "blockless-after-blockless"
+        ],
+        "ignore": ["after-comment"]
+      }
+    ],
+    "declaration-empty-line-before": "never",
+    "no-descending-specificity": null,
+    "block-closing-brace-newline-after": "always-single-line"
+  }
+}
