@@ -1,0 +1,81 @@
+@import 'Assets/style/_function.scss';
+
+.feedback-modal {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  background-color: rgba(135, 152, 169, 0.3);
+
+  .feedback-wrap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 52vw;
+    height: 41vw;
+    background-color: #fff;
+    box-shadow: 0 3px 6px 0 rgba(233, 233, 233, 0.5);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    .close {
+      top: 8px;
+      right: 16px;
+      width: 10px;
+      height: 10px;
+      cursor: pointer;
+    }
+
+    .header {
+      .icon {
+        width: 66px;
+        height: 66px;
+        margin: 36px 0 4px 6px;
+      }
+
+      p {
+        margin: 0;
+        font-size: 18px;
+        line-height: 24px;
+        font-weight: 600;
+        color: $colorTextBlue;
+      }
+    }
+
+    .info-wrap {
+      margin: 20px 50px;
+
+      .base-info-wrap {
+        display: flex;
+        justify-content: space-between;
+
+        .base-info {
+          label {
+            color: $colorTextBlue;
+            font-weight: 600;
+          }
+        }
+      }
+
+      .intro-wrap {
+        margin: 20px 0;
+        height: 27vw;
+        overflow: scroll;
+
+        p {
+          padding: 0 10px 10px;
+          font-weight: 600;
+          text-indent: 2em;
+        }
+      }
+    }
+  }
+
+  .close {
+    position: absolute;
+  }
+}

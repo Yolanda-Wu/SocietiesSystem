@@ -1,0 +1,39 @@
+@import 'Assets/style/_function.scss';
+
+.header-wrap {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  align-items: center;
+  padding: 0 107px;
+  color: $colorTextBlue;
+  position: fixed;
+  top: 0;
+  box-shadow: 0 3px 6px 0 #f7f8f9;
+
+  .left {
+    p {
+      font-size: 28px;
+      font-weight: 600;
+    }
+  }
+
+  .drop {
+    display: flex;
+    align-items: center;
+
+    .mine {
+      width: 27px;
+      height: 27px;
+      margin-right: 8px;
+    }
+
+    .arrow {
+      width: 9px;
+      height: 9px;
+      margin: 0 6px;
+    }
+  }
+}

@@ -2,14 +2,14 @@ import axios, { Method } from 'axios';
 import { camelizeKeys, decamelizeKeys } from 'humps';
 // import store, { history } from '../redux/store/index';
 
-axios.defaults.baseURL = 'https://cvs.bingyan.net/api/v1';
+axios.defaults.baseURL = 'http://10.12.137.147:8080';
 // axios.defaults.withCredentials = true; // 若跨域请求需要带 cookie 身份识别
 // axios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 
 // http response 拦截器
 axios.interceptors.response.use(
-  response => response,
-  error => {
+  (response) => response,
+  (error) => {
     if (error.response) {
       switch (error.response.status) {
         case 401:
@@ -37,23 +37,23 @@ const request = async (method = 'get', url = '', query = {}, data = {}) => {
   const underscoreData = decamelizeKeys(data);
   const underscoreQuery = decamelizeKeys(query);
   const headers = {
-    Authorization: `Bearer ${sessionStorage.getItem('jwtToken')}`
+    Authorization: `Bearer ${sessionStorage.getItem('jwtToken')}`,
   };
   switch (method.toUpperCase()) {
     case 'GET':
       console.log(underscoreData, underscoreQuery);
-      Object.keys(underscoreData).map(item => {
+      Object.keys(underscoreData).map((item) => {
         var reg = new RegExp(':' + item, 'g');
         url = url.replace(reg, underscoreData[item]);
       });
       console.log(underscoreData, underscoreQuery);
       result = await axios.get(url, {
         params: underscoreQuery,
-        headers
+        headers,
       });
       break;
     default:
-      Object.keys(underscoreData).map(item => {
+      Object.keys(underscoreData).map((item) => {
         var reg = new RegExp(':' + item, 'g');
         url = url.replace(reg, underscoreData[item]);
       });
@@ -61,7 +61,7 @@ const request = async (method = 'get', url = '', query = {}, data = {}) => {
         method,
         url,
         data: underscoreQuery,
-        headers
+        headers,
       });
       break;
   }

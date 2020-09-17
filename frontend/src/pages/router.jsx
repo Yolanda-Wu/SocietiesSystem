@@ -1,34 +1,25 @@
 import React from 'react';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
-import SocietiesLogin from './SocietiesLogin';
-import Login from './Login';
-import SocietiesAdmin from './SocietiesAdmin';
+import SocietyLogin from './SocietyLogin';
+import LeagueLogin from './LeagueLogin';
+import SocietyAdmin from './SocietyAdmin';
 import LeagueSocieties from './LeagueOfSocieties';
-import Join from './Join';
+import SocietyPlatform from './SocietyPlatform';
 
 const routes = [
-  // {
-  //   path: '/',
-  //   component: LeagueSocieties,
-  //   exact: true,
-  // },
-  // {
-  //   path: '/login',
-  //   component: Login,
-  //   exact: true,
-  // },
-  { path: '/societies/login', component: SocietiesLogin, exact: true },
-  { path: '/societies/:telephone', component: SocietiesAdmin },
-  { path: '/league/login', component: Login, exact: true },
+  {
+    path: '/',
+    component: LeagueSocieties,
+    exact: true,
+  },
+  { path: '/society/login', component: SocietyLogin, exact: true },
+  { path: '/society/:telephone', component: SocietyAdmin },
+  { path: '/league/login', component: LeagueLogin, exact: true },
   { path: '/league/:telephone', component: LeagueSocieties },
   {
-    path: '/join',
-    component: Join,
+    path: '/platform',
+    component: SocietyPlatform,
   },
-  // {
-  //   path: '/platform',
-  //   component: null
-  // }
 ];
 
 const RootRoute = () => (

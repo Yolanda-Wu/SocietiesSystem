@@ -1,0 +1,125 @@
+@import 'Assets/style/_function.scss';
+
+.league-login {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  overflow: hidden;
+  grid-template-columns: 7% 33% 20% 20% auto;
+  background-color: #fff;
+  @media only screen and (max-width: 366px) {
+    grid-template-columns: 7% 33% 20% 15% auto;
+  }
+
+  .left {
+    width: 100%;
+    grid-column: 2/3;
+
+    .back {
+      height: 78%;
+      margin-top: 11vh;
+      width: inherit;
+    }
+
+    .font {
+      width: 150%;
+      position: relative;
+      top: -60%;
+      left: 30%;
+    }
+  }
+
+  .right {
+    width: 100%;
+    height: 100%;
+    grid-column: 4/5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    header {
+      font-weight: bold;
+      font-size: 1.8rem;
+      color: $colorPrimary;
+      // margin-top: 30px;
+      margin-bottom: 40px;
+    }
+
+    main {
+      width: 100%;
+
+      .error {
+        height: 38px;
+        padding-left: 10px;
+      }
+
+      .phone,
+      .yzm {
+        width: 100%;
+        height: 50px;
+        border-radius: 33px;
+        outline: 0;
+      }
+
+      .send-yzm {
+        width: 100px;
+        height: 48px;
+        border-radius: 33px;
+        color: $colorBtn;
+        border: solid 1px $colorBtn;
+        font-size: 1.4rem;
+        font-weight: bold;
+        padding: 11px 4px;
+        position: absolute;
+        margin-left: 10px;
+        // transform: translate(250%, -99px);
+      }
+    }
+
+    .login-btn {
+      width: 70px;
+      height: 70px;
+      cursor: pointer;
+    }
+
+    footer {
+      width: 100%;
+      font-size: 1.2rem;
+      color: #918f8f;
+      margin-top: 40px;
+
+      p {
+        width: 76%;
+        margin: 5px auto;
+        line-height: 16px;
+      }
+    }
+
+    .error {
+      font-size: 1.1rem;
+      color: $colorTextWarn;
+    }
+  }
+
+  .apply-btn {
+    // position: fixed;
+    width: 163px;
+    height: 59px;
+    grid-column: 5/6;
+    background-color: #fff;
+    box-shadow: 0 3px 6px 0 rgba(233, 233, 233, 0.5);
+    border-radius: 30px;
+    text-align: center;
+    margin-top: 11vh;
+    margin-left: 15%;
+    cursor: pointer;
+
+    span {
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 59px;
+      color: #76b7fa;
+    }
+  }
+}

@@ -1,9 +1,9 @@
-import League from './League';
+import Activity from './Activity';
 
 const routes = [
   {
     path: '/',
-    component: League,
+    component: Activity,
     name: '招新报名',
     exact: true,
   },
