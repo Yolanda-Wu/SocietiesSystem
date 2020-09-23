@@ -1,23 +1,18 @@
 import League from './League';
+import Review from './Review';
 
 const routes = [
   {
     path: '/',
     component: League,
-    name: '招新报名',
+    name: '社团管理',
     exact: true,
   },
   {
-    path: '/detail',
+    path: '/review',
     exact: true,
-    component: null,
-    name: '招新报名',
-  },
-  {
-    path: '/result',
-    component: null,
-    name: '状态查询',
-    exact: true,
+    component: Review,
+    name: '申请表审核',
   },
 ];
 

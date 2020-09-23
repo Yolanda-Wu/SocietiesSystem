@@ -2,76 +2,48 @@ import React, { useState, useEffect, useRef } from 'react';
 import moment from 'moment';
 import Header from '../../../components/Header';
 import Loading from '../../../components/LoadingBox';
-import Feedback from './Feedback';
+import ChangeModal from './ChangeModal';
 import SocietyInfo from './SocietyInfo';
 import ArrowIcon from '../../../assets/images/login-phone-btn.svg';
 import './index.scss';
-import { useRouteMatch } from 'react-router';
-import { Table } from 'antd';
-
-const data = [
-  {
-    id: '',
-    name: '羽毛球社',
-    contact: '嘤嘤嘤',
-    contactInfo: '13728993030',
-    email: '17829304758@qq.com',
-    type: '',
-    establishedTime: 1600170021,
-    members: 30,
-    introduce: '场矿务局你扥叠加的李经理奶茶呢看上的拿出来的可能测控',
-  },
-  {
-    id: '',
-    name: '羽毛球社',
-    contact: '嘤嘤嘤',
-    contactInfo: '13728993030',
-    email: '17829304758@qq.com',
-    type: '',
-    establishedTime: 1600170021,
-    members: 30,
-    introduce: '场矿务局你扥叠加的李经理奶茶呢看上的拿出来的可能测控',
-  },
-  {
-    id: '',
-    name: '羽毛球社',
-    contact: '嘤嘤嘤',
-    contactInfo: '13728993030',
-    email: '17829304758@qq.com',
-    type: '',
-    establishedTime: 1600170021,
-    members: 30,
-    introduce: '场矿务局你扥叠加的李经理奶茶呢看上的拿出来的可能测控',
-  },
-  {
-    id: '',
-    name: '羽毛球社',
-    contact: '嘤嘤嘤',
-    contactInfo: '13728993030',
-    email: '17829304758@qq.com',
-    type: '',
-    establishedTime: 1600170021,
-    members: 30,
-    introduce: '场矿务局你扥叠加的李经理奶茶呢看上的拿出来的可能测控',
-  },
-];
+import { useRouteMatch, useHistory } from 'react-router';
+import { Table, message } from 'antd';
+import { getSocietyList } from '../../../api/league';
 
 export default function League() {
   const match = useRouteMatch('/league/:phone');
+  const history = useHistory();
 
   const [societies, setSocieties] = useState([]);
 
-  const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const scrolRef = useRef(null);
-  const [showFeedback, setShowFeedback] = useState(false);
+  const [showChangeModal, setShowChangeModal] = useState(false);
   const [showSocietyInfo, setShowSocietyInfo] = useState(false);
+  const [societyDetail, setSocietyDetail] = useState({});
+
+  const refresh = () => {
+    getSocietyList
+      .fetcher(getSocietyList.url, {
+        type: 1,
+      })
+      .then((data) => {
+        setSocieties(data.societies);
+        setLoading(false);
+        console.log(data, 'jj');
+      })
+      .catch((error) => {
+        message.error('网络出错');
+        setLoading(false);
+      });
+  };
 
   useEffect(() => {
-    setTimeout(() => {
-      setSocieties(data);
-      setLoading(false);
-    }, 1000);
+    refresh();
+    // setTimeout(() => {
+    //   setSocieties(data);
+    //   setLoading(false);
+    // }, 1000);
   }, []);
 
   const scrollToTop = () => {
@@ -83,7 +55,13 @@ export default function League() {
   };
 
   const showDetail = (name, record, index) => {
-    console.log(name, record, index);
+    setShowSocietyInfo(true);
+    setSocietyDetail(record);
+  };
+
+  const changeContact = (name, record, index) => {
+    setShowChangeModal(true);
+    setSocietyDetail(record);
   };
 
   const columns = [
@@ -93,7 +71,7 @@ export default function League() {
       key: 'name',
     },
     {
-      title: '社团联系人',
+      title: '社团负责人',
       dataIndex: 'contact',
       key: 'contact',
     },
@@ -106,7 +84,7 @@ export default function League() {
       title: '成立时间',
       dataIndex: 'establishedTime',
       key: 'establishedTime',
-      render: (text) => moment(text * 1000).format('YYYY-MM-DD'),
+      render: (text) => moment(text).format('YYYY-MM-DD'),
     },
     {
       title: '官方邮箱',
@@ -118,7 +96,16 @@ export default function League() {
       dataIndex: 'name',
       key: 'operate',
       render: (text, record, index) => (
-        <p onClick={(e) => showDetail(text, record, index)}>操作</p>
+        <div>
+          <a>
+            <p onClick={(e) => showDetail(text, record, index)}>查看详情</p>
+          </a>
+          <a>
+            <p onClick={(e) => changeContact(text, record, index)}>
+              修改负责人
+            </p>
+          </a>
+        </div>
       ),
     },
   ];
@@ -126,14 +113,14 @@ export default function League() {
   return (
     <div className='league-wrap' ref={scrolRef}>
       <Header type={1} telephone={match.params.phone} />
-      {/* <div className='operate-btns'>
-        <div className='intro' onClick={() => setShowSocietyInfo(true)}>
-          <span>团队介绍</span>
+      <div className='operate-btns'>
+        <div
+          className='intro'
+          onClick={() => history.push(`/league/${match.params.phone}/review`)}
+        >
+          <span>查看申请</span>
         </div>
-        <div className='feedback' onClick={() => setShowFeedback(true)}>
-          <span>联系我们</span>
-        </div>
-      </div> */}
+      </div>
       <div className='societies'>
         {societies.map((society, index) => (
           <div className='society-wrap'></div>
@@ -147,6 +134,19 @@ export default function League() {
       </div>
 
       <img className='toTop' src={ArrowIcon} onClick={scrollToTop} />
+      {showChangeModal && (
+        <ChangeModal
+          closeModal={() => setShowChangeModal(false)}
+          societyDetail={societyDetail}
+          refresh={refresh}
+        />
+      )}
+      {showSocietyInfo && (
+        <SocietyInfo
+          closeModal={() => setShowSocietyInfo(false)}
+          societyInfo={societyDetail}
+        />
+      )}
     </div>
   );
 }

@@ -1,5 +1,23 @@
 @import 'Assets/style/_function.scss';
 
+.header-nav {
+  width: 100%;
+  height: 150px;
+  position: fixed;
+  top: 0;
+  z-index: 2;
+
+  .navCom {
+    margin-top: 30px;
+
+    .nav {
+      margin-bottom: 30px;
+      font-size: 16px;
+      margin-left: 80px;
+    }
+  }
+}
+
 .header-wrap {
   width: 100%;
   height: 100px;
@@ -9,8 +27,6 @@
   align-items: center;
   padding: 0 107px;
   color: $colorTextBlue;
-  position: fixed;
-  top: 0;
   box-shadow: 0 3px 6px 0 #f7f8f9;
 
   .left {

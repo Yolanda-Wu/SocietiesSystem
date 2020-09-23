@@ -6,65 +6,32 @@ import Join from './Join';
 import LoginBtn from 'Assets/images/login-phone-btn.svg';
 import Machine from 'Assets/images/machine.svg';
 import BgColor from 'Assets/images/bgcolor.svg';
-import { sendYzm, getPrevFormInfo } from 'Api/sign';
+import { leagueLogin } from 'Api/league';
 
 import './index.scss';
 
 export default function SignLogin() {
   const associationName = '测试社团';
   const history = useHistory();
-  const [userInfo, setUserInfo] = useState({ phone: '', yzm: '' });
+  const [userInfo, setUserInfo] = useState({ phone: '', password: '' });
   const [showApply, setShowApply] = useState(false);
   const [errors, setErrors] = useState({
     phone: '',
-    yzm: '',
+    password: '',
     login: '',
   });
-  const [time, setTime] = useState(-1); // -1:未发送，1~60:已发送([time]秒后可重新发送)，0:可重新发送
-  let yzmText =
-    time === -1 ? '获取验证码' : time === 0 ? '重新发送' : `${time}秒`;
 
-  // 发送yzm倒计时
-  useEffect(() => {
-    if (time > 0) {
-      setTimeout(() => {
-        setTime(time - 1);
-      }, 1000);
-    }
-  }, [time]);
-
-  const { phone, yzm } = userInfo;
+  const { phone, password } = userInfo;
 
   const onChange = (e, key) => {
-    const { phone, yzm } = userInfo;
-    let newInfo = { phone, yzm };
+    const { phone, password } = userInfo;
+    let newInfo = { phone, password };
     if (key === 'phone') {
-      if (phone.length >= 11 && e.target.value.length > 11) {
-        return;
-      }
       newInfo.phone = e.target.value;
     } else {
-      newInfo.yzm = e.target.value;
+      newInfo.password = e.target.value;
     }
     setUserInfo(newInfo);
-  };
-
-  const onSendYzm = () => {
-    if (time > 0) return;
-    clearErrors();
-    if (/^1[3456789]\d{9}$/.test(userInfo.phone)) {
-      sendYzm
-        .fetcher(sendYzm.url, { phone: userInfo.phone })
-        .then((res) => {
-          setTime(60);
-          message.success('发送成功!');
-        })
-        .catch((error) => {
-          setErrors({ phone: error ? error : '发送失败' });
-        });
-      return;
-    }
-    setErrors({ phone: '手机号码格式不正确' });
   };
 
   const clearErrors = () => {
@@ -73,31 +40,34 @@ export default function SignLogin() {
 
   const login = () => {
     clearErrors();
-    const { phone, yzm } = userInfo;
+    const { phone, password } = userInfo;
 
-    if (phone.length === 11 && yzm) {
+    if (phone && password) {
       message.info('正在登录...', 1);
-      getPrevFormInfo
-        .fetcher(
-          getPrevFormInfo.url,
-          { verify_code: userInfo.yzm },
-          { association_name: associationName, phone: userInfo.phone }
-        )
+      leagueLogin
+        .fetcher(leagueLogin.url, {
+          telephone_number: userInfo.phone,
+          user_password: userInfo.password,
+        })
         .then((data) => {
+          console.log(data, '99');
           message.success('登录成功', 1);
-          sessionStorage.setItem('yzm', yzm);
-          history.push(`/sign/${phone}/edit?exists=${data.exists ? 1 : -1}`);
+          history.push(`/league/${phone}`);
         })
         .catch((error) => {
           setErrors({ login: error ? error : '登录失败' });
         });
     } else {
-      if (phone.length !== 11 && !yzm) {
-        setErrors({ ...errors, phone: '手机格式错误', yzm: '输入yzm' });
-      } else if (phone.length !== 11) {
-        setErrors({ ...errors, phone: '手机格式错误' });
-      } else {
-        setErrors({ ...errors, yzm: '输入yzm' });
+      if (!phone && !password) {
+        setErrors({
+          ...errors,
+          phone: '请输入账号',
+          password: '请输入密码',
+        });
+      } else if (!phone) {
+        setErrors({ ...errors, phone: '请输入账号' });
+      } else if (!password) {
+        setErrors({ ...errors, password: '请输入密码' });
       }
     }
   };
@@ -118,22 +88,21 @@ export default function SignLogin() {
           <Input
             className='phone'
             type='number'
-            placeholder='请输入手机号码'
+            placeholder='请输入账号'
             maxLength={11}
             value={phone}
             onChange={(e) => onChange(e, 'phone')}
           />
-          <Button className='send-yzm' onClick={onSendYzm}>
-            {yzmText}
-          </Button>
+
           <p className='error'>{errors.phone}</p>
           <Input
-            className='yzm'
-            placeholder='验证码'
-            value={yzm}
-            onChange={(e) => onChange(e, 'yzm')}
+            className='password'
+            placeholder='请输入密码'
+            value={password}
+            onChange={(e) => onChange(e, 'password')}
+            type='password'
           />
-          <p className='error'>{errors.yzm}</p>
+          <p className='error'>{errors.password}</p>
         </main>
         <img className='login-btn' src={LoginBtn} onClick={login}></img>
         <p className='error'>{errors.login}</p>

@@ -1,0 +1,148 @@
+@import 'Assets/style/_function.scss';
+
+.apply-modal {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  background-color: rgba(135, 152, 169, 0.3);
+
+  .society-wrap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 52vw;
+    height: 41vw;
+    background-color: #fff;
+    box-shadow: 0 3px 6px 0 rgba(233, 233, 233, 0.5);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    .close {
+      top: 8px;
+      right: 16px;
+      width: 10px;
+      height: 10px;
+      cursor: pointer;
+    }
+
+    .header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .icon {
+        width: 46px;
+        height: 46px;
+        margin: 36px 0 4px 0;
+      }
+
+      p {
+        margin: 0;
+        font-size: 18px;
+        line-height: 24px;
+        font-weight: 600;
+        color: $colorTextBlue;
+      }
+    }
+
+    .info-wrap {
+      margin: 20px auto;
+      width: 80%;
+
+      .base-info-wrap {
+        display: flex;
+        flex-wrap: wrap;
+
+        .base-info {
+          margin: 5px 40px 5px 0;
+
+          label {
+            color: $colorTextBlue;
+            font-weight: 600;
+          }
+        }
+      }
+
+      .intro-wrap {
+        margin: 20px 0;
+        max-height: 15vw;
+        overflow: scroll;
+
+        .content {
+          padding: 0 10px 10px;
+          font-weight: 600;
+          text-indent: 2em;
+        }
+
+        .text {
+          color: $colorTextBlue;
+          font-weight: 600;
+          font-size: 18px;
+        }
+
+        .reason {
+          width: 100%;
+          height: 100px;
+          border-radius: 10px;
+          border: 1px solid $colorPrimary;
+          outline: none;
+          padding: 10px;
+        }
+      }
+    }
+  }
+
+  .close {
+    position: absolute;
+  }
+
+  .btns {
+    display: flex;
+    margin-top: 50px;
+
+    .pass,
+    .reject {
+      width: 80px;
+      height: 40px;
+      border-radius: 20px;
+      text-align: center;
+      cursor: pointer;
+
+      span {
+        line-height: 40px;
+        color: #fff;
+        font-weight: 600;
+      }
+    }
+
+    .pass {
+      background-color: $colorPrimary;
+    }
+
+    .reject {
+      background-color: tomato;
+      margin-left: 50px;
+    }
+
+    &.confirm {
+      .pass,
+      .reject {
+        margin: 0;
+      }
+    }
+
+    &.isreview {
+      .pass,
+      .reject {
+        cursor: default;
+        opacity: 0.6;
+        margin: 0;
+      }
+    }
+  }
+}

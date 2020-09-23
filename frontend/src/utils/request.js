@@ -2,7 +2,9 @@ import axios, { Method } from 'axios';
 import { camelizeKeys, decamelizeKeys } from 'humps';
 // import store, { history } from '../redux/store/index';
 
-axios.defaults.baseURL = 'http://10.12.137.147:8080';
+axios.defaults.withCredentials = true;
+
+axios.defaults.baseURL = 'http://10.12.137.219:8080/api';
 // axios.defaults.withCredentials = true; // 若跨域请求需要带 cookie 身份识别
 // axios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 
@@ -15,10 +17,10 @@ axios.interceptors.response.use(
         case 401:
           // 401 清除token信息并跳转到登录页面
           // 后端要给提示
-          sessionStorage.removeItem('jwtToken');
-          window.location.href = '/';
+          // sessionStorage.removeItem('jwtToken');
+          // window.location.href = '/';
           // history.push('/');
-          console.log('401');
+          // console.log('401');
           break;
         case 400:
           console.log('400');
@@ -26,7 +28,7 @@ axios.interceptors.response.use(
         default:
       }
     }
-    // console.log(error.response.data);
+    // console.log(error.response, '9999');
     return Promise.reject(error.response.data.error);
   }
 );
@@ -37,14 +39,16 @@ const request = async (method = 'get', url = '', query = {}, data = {}) => {
   const underscoreData = decamelizeKeys(data);
   const underscoreQuery = decamelizeKeys(query);
   const headers = {
-    Authorization: `Bearer ${sessionStorage.getItem('jwtToken')}`,
+    withCredentials: true,
   };
   switch (method.toUpperCase()) {
     case 'GET':
       console.log(underscoreData, underscoreQuery);
       Object.keys(underscoreData).map((item) => {
         var reg = new RegExp(':' + item, 'g');
+        console.log(url, 'qq');
         url = url.replace(reg, underscoreData[item]);
+        console.log(url, 'gg', underscoreData);
       });
       console.log(underscoreData, underscoreQuery);
       result = await axios.get(url, {
@@ -65,6 +69,7 @@ const request = async (method = 'get', url = '', query = {}, data = {}) => {
       });
       break;
   }
+  console.log(result, 'llll');
   return camelizeKeys(result).data.data;
 };
 

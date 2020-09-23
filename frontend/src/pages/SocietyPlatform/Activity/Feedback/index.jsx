@@ -2,13 +2,17 @@ import React, { useState, useCallback } from 'react';
 import ApplyIcon from '../../../../assets/images/apply-header.svg';
 import CloseIcon from '../../../../assets/images/close.svg';
 import './index.scss';
+import { feedback } from '../../../../api/platform';
+import { useRouteMatch } from 'react-router';
+import { message } from 'antd';
 
-export default function Feedback({ closeModal }) {
+export default function Feedback({ closeModal, societyName }) {
   const [applyInfo, setApplyInfo] = useState({
-    societyName: '',
-    contact: '',
-    contactInfo: '',
-    attach: '',
+    // societyName: '',
+    title: '',
+    content: '',
+    telephone: '',
+    name: '',
   });
 
   const applyForm = [
@@ -45,6 +49,17 @@ export default function Feedback({ closeModal }) {
 
   const onSubmit = () => {
     if (checkApplyInfoFormat()) {
+      feedback
+        .fetcher(feedback.url, applyInfo, {
+          societyName: societyName,
+        })
+        .then((data) => {
+          message.success('反馈成功，请耐心等待回复');
+          closeModal();
+        })
+        .catch((error) => {
+          message.error('反馈失败，请重试');
+        });
     }
   };
 

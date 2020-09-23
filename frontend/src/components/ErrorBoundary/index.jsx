@@ -18,10 +18,10 @@ export default class ErrorBoundary extends Component {
   }
 
   render() {
-    if (this.state.hasError) {
-      // You can render any custom fallback UI
-      return <h1 className='error-boundary'>加载失败！</h1>;
-    }
+    // if (this.state.hasError) {
+    //   // You can render any custom fallback UI
+    //   return <h1 className='error-boundary'>加载失败！</h1>;
+    // }
 
     return this.props.children;
   }

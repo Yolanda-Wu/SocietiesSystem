@@ -5,20 +5,25 @@ import LeagueLogin from './LeagueLogin';
 import SocietyAdmin from './SocietyAdmin';
 import LeagueSocieties from './LeagueOfSocieties';
 import SocietyPlatform from './SocietyPlatform';
+import VisitPlatform from './VisitPlatform';
 
 const routes = [
-  {
-    path: '/',
-    component: LeagueSocieties,
-    exact: true,
-  },
-  { path: '/society/login', component: SocietyLogin, exact: true },
-  { path: '/society/:telephone', component: SocietyAdmin },
+  { path: '/:societyName/society/login', component: SocietyLogin, exact: true },
+  { path: '/:societyName/society/:telephone', component: SocietyAdmin },
   { path: '/league/login', component: LeagueLogin, exact: true },
   { path: '/league/:telephone', component: LeagueSocieties },
   {
-    path: '/platform',
+    path: '/:societyName/platform/:telephone',
     component: SocietyPlatform,
+  },
+  {
+    path: '/:societyName/visit',
+    component: VisitPlatform,
+  },
+  {
+    path: '/',
+    component: LeagueLogin,
+    exact: true,
   },
 ];
 

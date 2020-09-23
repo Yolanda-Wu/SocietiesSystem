@@ -12,8 +12,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 52vw;
-    height: 41vw;
+    width: 62vw;
+    height: 51vw;
     background-color: #fff;
     box-shadow: 0 3px 6px 0 rgba(233, 233, 233, 0.5);
     border-radius: 5px;
@@ -67,10 +67,14 @@
           margin-top: 18px;
         }
 
-        &:last-child {
+        &.textarea {
           align-items: flex-start;
-          height: 150px;
+          height: 200px;
         }
+
+        // &.select {
+        //   justify-content: flex-start;
+        // }
 
         label {
           font-size: 16px;
