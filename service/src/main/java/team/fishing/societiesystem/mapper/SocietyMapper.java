@@ -43,6 +43,10 @@ public interface SocietyMapper {
     @Select("select * from society where name = #{name}")
     Society selectSocietyByName(String name);
 
+
+    @Select("select * from user_society where user_id = #{userID} and society_id = #{societyID}")
+    Map<String,Object> selectUserSociety(Long userID,Long societyID);
+
     @Select("select user_id from user_society  where society_id = #{societyID} and user_right = 1")
     List<String> findSocietyAdminBySocietyID(Integer societyID);
 

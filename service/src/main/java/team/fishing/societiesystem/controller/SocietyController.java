@@ -431,15 +431,18 @@ public class SocietyController {
         }
 
 
+
+
         try {
             //societyService.deletSocietyAdminBySocietyID(societyID);
-
             if(userService.findUserByTelephone(contactInfo) != null){
+                User u = userService.findUserByTelephone(contactInfo);
+                if(societyService.setSocietyAdminBySocietyIDAndTelephone(societyID,contactInfo) <= 0 && societyService.selectUserSociety(u.getId(),societyID) == null) {
 
-                if(societyService.setSocietyAdminBySocietyIDAndTelephone(societyID,contactInfo) <= 0) {
-                    User u = userService.findUserByTelephone(contactInfo);
+
                     userService.insertUserSocietyRight(u.getId(),societyID,1,societyName);
                 }
+                userService.updateUserInfo(contact,contactInfo,u.getId());
 
 
             }else{

@@ -43,7 +43,13 @@ public interface SocietyService {
 
     public List<Map<String,Object>> selectSocietyActivityMemberInfo(Long activityID);
 
+
+    public Map<String,Object> selectUserSociety(Long userID,Long societyID);
+
+
     public Integer setSocietyAdminBySocietyIDAndTelephone(Long societyID,String telephone);
+
+
 
     public Integer deletSocietyAdminBySocietyID(Long societyID);
 

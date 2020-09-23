@@ -90,6 +90,12 @@ public class SocietyServiceImpl implements SocietyService {
     }
 
     @Override
+    public Map<String,Object> selectUserSociety(Long userID,Long societyID){
+        return societyMapper.selectUserSociety(userID,societyID);
+    }
+
+
+    @Override
     public Integer deletSocietyAdminBySocietyID(Long societyID){
         return societyMapper.deletSocietyAdminBySocietyID(societyID);
     }
