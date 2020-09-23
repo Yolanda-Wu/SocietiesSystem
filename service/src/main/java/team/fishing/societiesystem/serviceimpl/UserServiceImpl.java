@@ -7,6 +7,8 @@ import team.fishing.societiesystem.mapper.UserMapper;
 import team.fishing.societiesystem.service.UserService;
 
 import java.net.Inet4Address;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @version V1.0
@@ -62,7 +64,10 @@ public class UserServiceImpl implements UserService {
         return userMapper.deleteUser(id);
     }
 
-
+    @Override
+    public List<Map<String,Object>> selectSocietyMember(String societyName){
+        return userMapper.selectSocietyMember(societyName);
+    }
 
 
 

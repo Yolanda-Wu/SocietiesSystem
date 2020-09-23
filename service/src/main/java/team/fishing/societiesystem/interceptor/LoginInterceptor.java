@@ -31,7 +31,8 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        log.info("==========登录状态拦截");
+        /*
+        log.info("==========登录状态拦截检查");
 
         HttpSession session = request.getSession();
         log.info("sessionId为：" + session.getId());
@@ -39,17 +40,25 @@ public class LoginInterceptor implements HandlerInterceptor {
         // 获取用户信息，如果没有用户信息直接返回提示信息
         Object userInfo = session.getAttribute("userInfo");
         if (userInfo == null) {
+
             log.info("没有登录");
+            log.info("sessionId为：" + request.getSession().getId());
+
             String json = "{\n" +
                     "    \"status\":401,\n" +
-                    "    \"err_msg\":\"Unauthorized\"\n" +
+                    "    \"err_msg\":\"Unauthorized 拦截器\"\n" +
                     "}";
+
+
+            //response.setStatus(401);
             response.getWriter().write(json);
             return false;
         } else {
             log.info("已经登录过啦，用户信息为：" + session.getAttribute("userInfo"));
         }
 
+
+         */
         return true;
     }
 
