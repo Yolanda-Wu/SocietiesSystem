@@ -1,24 +1,19 @@
-import Edit from './Edit';
+import League from './League';
+import Review from './Review';
 
 const routes = [
   {
-    path: '/edit',
-    component: Edit,
-    name: '招新报名',
-    exact: true
-  },
-  {
-    path: '/detail',
+    path: '/',
+    component: League,
+    name: '社团管理',
     exact: true,
-    component: null,
-    name: '招新报名'
   },
   {
-    path: '/result',
-    component: null,
-    name: '状态查询',
-    exact: true
-  }
+    path: '/review',
+    exact: true,
+    component: Review,
+    name: '申请表审核',
+  },
 ];
 
 export default routes;
