@@ -4,6 +4,9 @@ import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 import team.fishing.societiesystem.entity.User;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @version V1.0
  * @Title: UserMapper
@@ -39,6 +42,9 @@ public interface UserMapper {
 
     @Delete("delete from user where id = #{id}")
     Integer deleteUser(Long id);
+
+    @Select("SELECT user.id,user.telephone_number,user_society.user_right,user.name from user,user_society WHERE user.id = user_society.user_id and society_name = #{societyName} ")
+    List<Map<String,Object>> selectSocietyMember(String societyName);
 
 
 

@@ -3,6 +3,9 @@ package team.fishing.societiesystem.service;
 import org.apache.ibatis.annotations.Param;
 import team.fishing.societiesystem.entity.User;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @version V1.0
  * @Title: UserService
@@ -29,6 +32,9 @@ public interface UserService {
 
 
     public Integer deleteUser(Long id);
+
+    public List<Map<String,Object>> selectSocietyMember(String societyName);
+
 
 }
 

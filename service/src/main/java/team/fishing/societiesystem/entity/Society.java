@@ -20,15 +20,17 @@ import java.util.Date;
 @NoArgsConstructor
 public class Society {
     private Long id;
-    private Long name;
+    private String name;
     private String contact;
     private String contactInfo;
     private String email;
     private String type;
-    private Date establishedTime;
-    private int members;
+    private Long establishedTime;
+    private Integer members;
     private String introduce;
-    private boolean isEstablished;
+    private Integer isEstablished;
+    private String attach;
+    private Integer isReviewed;
 
 }
 

@@ -19,8 +19,8 @@ import java.util.Date;
 public class SocietyActivity {
     private Long activityId;
     private Long societyId;
-    private Date startTime;
-    private Date endTime;
+    private Long startTime;
+    private Long endTime;
     private String title;
     private String description;
     private byte[] imgs;
