@@ -31,6 +31,7 @@ export default function Activity() {
   const scrolRef = useRef(null);
   const [showFeedback, setShowFeedback] = useState(false);
   const [showSocietyInfo, setShowSocietyInfo] = useState(false);
+  const [isEnd, setIsEnd] = useState(false);
 
   useEffect(() => {
     refresh(page);
@@ -47,7 +48,15 @@ export default function Activity() {
         }
       )
       .then((data) => {
-        setActivities([...activities, ...data.activities]);
+        if (data.activities.length === 0) {
+          setIsEnd(true);
+        } else if (page === 1) {
+          setActivities(data.activities);
+
+          setIsEnd(false);
+        } else {
+          setActivities([...activities, ...data.activities]);
+        }
         setLoading(false);
       })
       .catch((error) => {
@@ -57,7 +66,11 @@ export default function Activity() {
   };
 
   const handleScroll = (e) => {
-    if (e.target.scrollTop + e.target.clientHeight === e.target.scrollHeight) {
+    if (
+      !isEnd &&
+      !loading &&
+      e.target.scrollTop + e.target.clientHeight === e.target.scrollHeight
+    ) {
       setPage(page + 1);
       setLoading(true);
     }

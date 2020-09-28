@@ -56,10 +56,10 @@ export default function SignLogin() {
         })
         .then((data) => {
           message.success('登录成功', 1);
-          history.push(`/${associationName}/${loginType}/${phone}`);
+          // history.push(`/${associationName}/${loginType}/${phone}`);
         })
         .catch((error) => {
-          setErrors({ login: error ? error : '登录失败' });
+          setErrors({ login: error ? error : '用户名或密码错误' });
         });
     } else {
       if (!phone && !password) {
@@ -113,7 +113,7 @@ export default function SignLogin() {
             <p className='error'>{errors.phone}</p>
             <Input
               className='yzm'
-              placeholder='验证码'
+              placeholder='请输入密码'
               value={password}
               onChange={(e) => onChange(e, 'password')}
               type='password'

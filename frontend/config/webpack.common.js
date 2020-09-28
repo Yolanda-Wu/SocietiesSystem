@@ -34,7 +34,7 @@ module.exports = {
             removeEmptyAttributes: true,
           },
       template: 'src/index.html',
-      chunks: ['app'],
+      chunks: ['app', 'vendors', 'common'],
       // favicon: 'src/assets/images/logo.png',
       filename: 'index.html',
     }),

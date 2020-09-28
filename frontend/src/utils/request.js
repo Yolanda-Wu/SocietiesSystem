@@ -4,7 +4,7 @@ import { camelizeKeys, decamelizeKeys } from 'humps';
 
 axios.defaults.withCredentials = true;
 
-axios.defaults.baseURL = 'http://10.12.137.219:8080/api';
+axios.defaults.baseURL = 'http://10.12.136.157:8080/api';
 // axios.defaults.withCredentials = true; // 若跨域请求需要带 cookie 身份识别
 // axios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 

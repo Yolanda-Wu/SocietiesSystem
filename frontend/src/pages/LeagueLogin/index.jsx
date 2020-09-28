@@ -55,7 +55,7 @@ export default function SignLogin() {
           history.push(`/league/${phone}`);
         })
         .catch((error) => {
-          setErrors({ login: error ? error : '登录失败' });
+          setErrors({ login: error ? error : '用户名或密码错误' });
         });
     } else {
       if (!phone && !password) {

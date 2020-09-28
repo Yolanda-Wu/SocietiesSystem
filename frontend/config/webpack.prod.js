@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+// const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // 把css文件抽出来
 const common = require('./webpack.common.js');
 const TerserPlugin = require('terser-webpack-plugin');
@@ -46,13 +46,13 @@ module.exports = merge(common, {
     ],
   },
   optimization: {
-    // splitChunks: {
-    //   name: "vendors",
-    //   chunks: "all" // 静态导入，将公共模块提取出来
-    // },
-    // runtimeChunk: {
-    //   name: "common"
-    // },
+    splitChunks: {
+      name: 'vendors',
+      chunks: 'all', // 静态导入，将公共模块提取出来
+    },
+    runtimeChunk: {
+      name: 'common',
+    },
     minimize: true,
     minimizer: [new TerserPlugin()],
   },
